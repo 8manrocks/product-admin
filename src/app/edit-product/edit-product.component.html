@@ -1,0 +1,69 @@
+<div class="container-fluid py-4">
+    <image-cropper
+[imageBase64] = "savedImg" 
+[imageChangedEvent]="imgChangeEvt" 
+[maintainAspectRatio]="true" 
+[aspectRatio]="4 / 4"
+[resizeToWidth]="256" 
+format="png" 
+(imageCropped)="cropImg($event)" 
+>
+</image-cropper>
+<div class="d-flex">
+    <label type="button" class="btn btn-link">
+        <input type="file" (change) = "upload($event)">
+        Upload
+    </label>
+    
+    <button mat-stroked-button class="ml-auto" (click) = "setImg()">Set Image</button>
+</div>
+
+<div class="container-fluid" [formGroup] = "productForm">
+    <div class="row">
+        <div class="col-md-4 my-2">
+            <label for="productId">Id</label>
+            <input type="number" class="form-control" class="form-control" formControlName = "productId">
+        </div>
+        <div class="col-md-4 my-2">
+            <label for="productName">Product Name</label>
+            <input type="text" class="form-control" formControlName = "productName">
+        </div>
+        <div class="col-md-4 my-2">
+            <label for="category">Category</label>
+            <select type="text" class="form-control" formControlName = "category">
+                <option value="Electronics">
+                    Electronics
+                </option>
+            </select>  
+        </div>
+        <div class="col-md-4 my-2">
+            <label for="subCategory">Sub Category</label>
+            <select type="text" class="form-control" formControlName = "subCategory">
+                <option value="Wifi Router">
+                    Wifi Router
+                </option>
+            </select>
+        </div>
+        <div class="col-md-4 my-2">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" formControlName = "price">
+        </div>
+        <div class="col-md-4 my-2">
+            <label for="stock">Stock</label>
+            <input type="number" class="form-control" formControlName = "stock">
+        </div>
+        <div class="col-md-4 my-2">
+            <label for="brand">Brand</label>
+            <input type="text" class="form-control" formControlName = "brand">
+        </div>
+        <div class="col-md-4 my-2">
+            <label for="desc">Description</label>
+            <textarea type="text" class="form-control" (change) = "setDesc($event)" [value] = "description"></textarea>
+        </div>
+    </div>
+</div>
+<div class="alert alert-success" role="alert" *ngIf = "show">
+    Products have been modified
+  </div>
+<button mat-raised-button (click) = "submit()">submit</button>
+</div>

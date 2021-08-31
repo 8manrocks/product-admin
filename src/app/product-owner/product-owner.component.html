@@ -1,0 +1,107 @@
+<div class="container-fluid p-4">
+    <h1><b>PRODUCT OWNER</b></h1>
+    <hr>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <!-- id Column -->
+                    <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element?.productId}} </mat-cell>
+                    </ng-container>
+
+                    <!-- productName Column -->
+                    <ng-container matColumnDef="ProductName">
+                        <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element?.productName}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Category Column -->
+                    <ng-container matColumnDef="Category">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Category </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element?.category}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="Price">
+                        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element?.price}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="Stock">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Stock </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element?.stock}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="edit">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <button mat-button (click) = "openMod(element)">
+                                <mat-icon aria-hidden="false" aria-label="edit">edit</mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="delete">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <button mat-button (click) = "remove(element.productId)">
+                                <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple (click)="showDetails(row)">
+                    </mat-row>
+                </table>
+                <mat-paginator [length]="dataSource?.data?.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
+                    #paginator aria-label="Select page">
+                </mat-paginator>
+                <button mat-raised-button (click) = "openMod()">Click to add a Product</button>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" *ngIf="product">
+                    <img class="card-img-top" [src]="product?.imageUrl">
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                              <th>Product Id</th>
+                              <td>{{product?.productId}}</td>
+                            </tr>
+                            <tr>
+                              <th>Product Name</th>
+                              <td>{{product?.productName}}</td>
+                            </tr>
+                            <tr>
+                              <th>Brand</th>
+                              <td>{{product?.brand}}</td>
+                            </tr>
+                            <tr>
+                                <th>Category</th>
+                                <td>{{product?.category}}</td>
+                            </tr>
+                            <tr>
+                                <th>Sub Category</th>
+                                <td>{{product?.subCategory}}</td>
+                            </tr>
+                            <tr>
+                                <th>Stock</th>
+                                <td>{{product?.stock}}</td>
+                            </tr>
+                            <tr>
+                                <th>Price</th>
+                                <td>{{product?.price}}</td>
+                            </tr>
+                          </table>
+                        <p class="card-text text-muted text-center">{{product?.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
