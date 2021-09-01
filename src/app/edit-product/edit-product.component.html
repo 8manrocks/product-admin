@@ -65,5 +65,5 @@ format="png"
 <div class="alert alert-success" role="alert" *ngIf = "show">
     Products have been modified
   </div>
-<button mat-raised-button (click) = "submit()">submit</button>
+<button mat-raised-button (click) = "submit()" [disabled] = "!productForm.valid">submit</button>
 </div>
